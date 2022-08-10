@@ -16,9 +16,5 @@ def form(request):
         return render(request, 'fileform.html', {
                 'Output_file_urls': outFile
             })
-        # for i in outFile:
-        #     converted_file_url = fs.url(i)
-        #     return render(request, 'fileform.html', {
-        #         'Output_file_urls': converted_file_url
-        #     })
+
     return render(request, 'fileform.html')
