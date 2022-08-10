@@ -2,20 +2,43 @@
 {% load static %}
 
 <head>
-    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+  <style>
+      #main{
+          width: 600px; 
+          border: 10px double black; 
+          margin-left:350px;
+          margin-top: 75px;
+          padding-left: 30px;
+      }
+
+      h1,p{
+        text-align: center;
+      }
+
+      .row{
+        display: flex;
+        align-items: flex-start;
+      }
+
+
+  </style>
 </head>
 
 {% block content %}
+<div id="main">
+  <h1>Automated Configuration Generator<br></h1>
+  <p>Choose any Excel file to convert each sheet to JSON</p>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="file" name="myfile">
     <button type="submit">Convert</button>
   </form>
-
-  {% if uploaded_file_url %}
-    <p>Converted Files: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-  {% endif %}
-
+  {% for i in Output_file_urls %}
+    <div class="row">
+      <p><a href="/media/{{ i }}" download>{{ i }}</a></p>
+    </div>
+  {% endfor%}
+</div>
 {% endblock %}
 
 

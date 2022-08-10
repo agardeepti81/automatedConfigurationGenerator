@@ -8,13 +8,17 @@ def form(request):
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
+        outFile = []
         genObj = Generator()
         genObj.setInputFile(myfile)
         outFile = genObj.Convert()
-        for i in outFile:
-            converted_file_url = fs.url(i)
-            return render(request, 'fileform.html', {
-                'uploaded_file_url': converted_file_url
+        print(outFile)
+        return render(request, 'fileform.html', {
+                'Output_file_urls': outFile
             })
+        # for i in outFile:
+        #     converted_file_url = fs.url(i)
+        #     return render(request, 'fileform.html', {
+        #         'Output_file_urls': converted_file_url
+        #     })
     return render(request, 'fileform.html')
